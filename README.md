@@ -8,13 +8,15 @@ A simple tool for printing the current license status of your Chef server.
 # Usage
 Run this script on the console of the Chef Server. It will return a 30-day table of the Chef server usage in CSV format.
 
-Example output:  
-`as_of_date,node_count,node_count_since_yesterday,node_count_past_7days  
-2015-02-18,2,2,2  
-2015-02-17,2,2,2  
-2015-02-16,2,2,2...  
-
-2015-01-19,2,2,2`
+Example output:
+```
+as_of_date,node_count,node_count_since_yesterday,node_count_past_7days
+2015-02-18,2,2,2
+2015-02-17,2,2,2
+2015-02-16,2,2,2
+...
+2015-01-19,2,2,2
+```
 
 # Known issues
 - Will return 30 days of output even if the server has not been in use for 30 days. Disregard any output recorded for extra history.
