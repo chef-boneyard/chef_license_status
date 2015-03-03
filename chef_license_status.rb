@@ -3,13 +3,28 @@
 
 require 'chef/config'
 require 'chef/rest'
+require 'csv'
+require 'socket'
 
-chef_server_url = 'https://localhost/'
+hostname = Socket.gethostname
+chef_server_url = "http://#{hostname}/"
 client_name = 'pivotal'
 signing_key_filename = '/etc/opscode/pivotal.pem'
-
 rest = Chef::REST.new(chef_server_url, client_name, signing_key_filename)
 license = rest.get_rest('/license')
+node_count = license['node_count']
+
 current_time = Time.new.strftime('%Y-%m-%d %I:%M%p %Z')
-puts 'Chef server global node count as of '\
-     "#{current_time}: #{license['node_count']}"
+
+column_names = ['Date', 'Hostname', 'Node Count']
+values = %W(#{current_time} #{hostname} #{node_count})
+headers_present = false
+csv_output = CSV.generate do |csv|
+  unless headers_present
+    csv << column_names
+    headers_present = true
+  end
+  csv << values
+end
+
+puts csv_output

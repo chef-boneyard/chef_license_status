@@ -6,11 +6,12 @@ A simple tool for printing the current license status of your Chef server.
 - Console access to the Chef server
  
 # Usage
-Run this script on the console of the Chef Server. It will return a timestamped count of the current number of nodes in use across the entire Chef Server.
+Run this script on the console of the Chef Server. It will return a CSV with a timestamp, the hostname, and a count of the current number of nodes in use across the entire Chef Server. This can be piped to a file for consumption.
 
 Example output:
 ```
-Chef server global node count as of 2015-02-21 08:39PM UTC: 468
+Date,Hostname,Node Count
+2015-03-03 02:42AM UTC,chef-demo-server.example.com,234
 ```
 
 # Known issues
