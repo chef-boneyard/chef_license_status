@@ -16,8 +16,9 @@ node_count = license['node_count']
 # create a Time object that is 30.5 days in the past
 since =  Time.now - (60 * 60 * 24 * 30.5)
 checkin_since = 0
-puts "***********************************************************"
-puts "creating report for nodes that have checked in since #{since} \n\n"
+# uncomment puts below for more details, it's not compatible with the csv_output  
+# puts "***********************************************************"
+# puts "creating report for nodes that have checked in since #{since} \n\n"
 
 orgs = rest.get_rest('/organizations')
 orgs.each do |org|
@@ -26,12 +27,12 @@ orgs.each do |org|
   nodes.each do |node|
     object = rest.get_rest("/organizations/#{org[0]}/nodes/#{node[0]}")
     if Time.at(object['automatic']['ohai_time']) > since
-      puts "organization:\ #{org[0]}\ node:\ #{object['name']}\ checked\ in:\ #{Time.at(object['automatic']['ohai_time'])}"
+#       puts "organization:\ #{org[0]}\ node:\ #{object['name']}\ checked\ in:\ #{Time.at(object['automatic']['ohai_time'])}"
       checkin_since += 1
     end
   end
 end
-puts "********************************************************** \n\n"
+# puts "********************************************************** \n\n"
 
 current_time = Time.new.strftime('%Y-%m-%d %I:%M%p %Z')
 

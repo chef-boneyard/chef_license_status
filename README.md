@@ -4,18 +4,20 @@ A simple tool for printing the current license status of your Chef server.
 # Requirements
 - Chef Server 12 or higher
 - Console access to the Chef server
- 
+
 # Usage
 Run this script on the console of the Chef Server. It will return a CSV with a timestamp, the hostname, and a count of the current number of nodes in use across the entire Chef Server. This can be piped to a file for consumption.
 
+Includes a count for nodes that have not checked in for 30.5 days.
+
 Example output:
 ```
-Date,Hostname,Node Count
-2015-03-03 02:42AM UTC,chef-demo-server.example.com,234
+Date,Hostname,Node Count,Checked In
+2015-03-03 02:42AM UTC,chef-demo-server.example.com,234,200
 ```
 
 # Known issues
-- Reports all nodes registered on the server at the time it is run, regardless of surge / burst usage.
+- Reports all nodes registered on the server at the time it is run, regardless of surge / burst usage.  
 
 # Author
 Author:: Charles Johnson (charles@chef.io)
